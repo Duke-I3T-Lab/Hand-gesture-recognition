@@ -69,30 +69,14 @@ class DataPreprocessor():
             head_p = self._str_process(raw_features[16])
             head_e = self._str_process(raw_features[17])
             head_e = self._quaternion_2_euler(head_e)
-            '''
-            with Pool(4) as p:
-                tool_p, tool_e, head_p, head_e = p.map(self._str_process,
-                                                      [raw_features[14],
-                                                       raw_features[15],
-                                                       raw_features[16],
-                                                       raw_features[17]])
-            with Pool(2) as p:
-                tool_e, head_e = p.map(self._quaternion_2_euler,
-                                       [tool_e,
-                                        head_e])
-            '''
+
             rhand_p = []
             lhand_p = []
             
             for idx in range(0,26):
                 rhand_p.append(self._str_process(raw_features[18+idx]))
                 lhand_p.append(self._str_process(raw_features[44+idx]))
-            '''
-            with Pool(4) as p:
-                rhand_p = p.map(self._str_process, [raw_features[18+idx] for idx in range(0,26)])
-            with Pool(4) as p:
-                lhand_p = p.map(self._str_process, [raw_features[44+idx] for idx in range(0,26)])
-            '''
+
             X[0:3] = tool_p - head_p
             X[3:6] = tool_e
             X[6:9] = head_e
