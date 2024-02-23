@@ -77,7 +77,7 @@ Please cite the following paper in your publications if this code helps your res
 }
 ```
 # Acknowledgments
-The contributors of the code are Neha Vutakuri, [Tiffany Ma](https://sites.duke.edu/tiffanyma/), [Sarah Eom](https://sites.duke.edu/sangjuneom/), and [Maria Gorlatova](https://maria.gorlatova.com/). For questions on this repository or the related paper, please contact Sangjun (Sarah) Eom at sangjun.eom [AT] duke [DOT] edu.
+The contributors of the code are [Tianyi Hu](http://hutianyi.tech/) and [Maria Gorlatova](https://maria.gorlatova.com/). For questions on this repository or the related paper, please contact Tianyi Hu at tianyi.hu [AT] duke [DOT] edu.
 
 This work was supported in part by NSF grants CNS-2112562 and CNS-1908051, NSF CAREER Award IIS-2046072, and by a Thomas Lord Educational Innovation Grant.
 
