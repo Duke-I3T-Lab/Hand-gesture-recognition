@@ -43,7 +43,9 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
        
 if __name__ == '__main__':
     # replace the following ip and port with
-    # your HoloLens 2's ip and port in LAN
+    # the labelling PC's ip address
+    # the labelling PC will act as a http server
+    # the hololens will send requests to the server to query the ground truth label
     httpd = HTTPServer(("192.168.1.31", 8000), HTTPRequestHandler)
     print("HTTP Running")
     print("="*20)
