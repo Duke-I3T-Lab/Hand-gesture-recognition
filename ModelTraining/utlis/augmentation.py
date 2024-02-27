@@ -1,10 +1,8 @@
 import numpy as np
 from tqdm import tqdm
-import numba
 
 # https://github.com/uchidalab/time_series_augmentation/blob/master/utils/augmentation.py
 
-#@numba.jit(nopython=True)
 def jitter(x, sigma=0.03):
     # https://arxiv.org/pdf/1706.00527.pdf
     return x + np.random.normal(loc=0., scale=sigma, size=x.shape)
