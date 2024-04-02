@@ -42,6 +42,7 @@ git clone git@github.com:Duke-I3T-Lab/Hand-gesture-recognition.git
     - pandas (tested on 2.0.3)
     - pytorch (tested on 2.0.1)
     - scikit-learn (tested on 1.2.2)
+    - transformers (tested on 4.36.1)
 
 ## Data Collection
 
