@@ -12,6 +12,7 @@ from pickle import load
 from scipy.spatial.transform import Rotation as R
 
 from models import CNN2DGRU
+from models import PatchTSMixer
 
 import time
 
@@ -175,12 +176,22 @@ class LabelBuffer:
 def load_model(model_path, device):
     state_dict = torch.load(model_path, 
                             map_location=device)['state_dict']
-    model = CNN2DGRU.CNN2DGRUModel(
+    # model = CNN2DGRU.CNN2DGRUModel(
+    #                 input_dim=78, 
+    #                 hidden_dim=128, 
+    #                 layer_dim=3, 
+    #                 output_dim=5, 
+    #                 dropout_prob=0.0)
+    
+    model = PatchTSMixer.PatchTSMixer(
                     input_dim=78, 
                     hidden_dim=128, 
                     layer_dim=3, 
                     output_dim=5, 
-                    dropout_prob=0.0)
+                    dropout_prob=0.0, 
+                    context_length=30
+    )
+
     model.load_state_dict(state_dict)
     model.to(device)
     return model
@@ -195,7 +206,9 @@ def Buffer2ML_Process(receive_lock, receive_share_data,
     print("Run on {}...".format(device))
     
     print("Load CNN-GRU Model")
-    model_path = './saved_model' +'/cnn2dgru.pth'
+    #model_path = './saved_model' +'/cnn2dgru.pth'
+    model_path = './saved_model' +'/PatchTSMixer.pth'
+
     model = load_model(model_path, device)
     model.eval()
     print(model)
