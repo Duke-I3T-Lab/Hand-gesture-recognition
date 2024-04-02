@@ -196,14 +196,14 @@ def load_labelled_data_combine(PATH, combineLeftRight=True):
 
 
 
-def generate_time_lags(X_df, y_df, lagWindowSize):
+def generate_time_lags(X_df, y_df, lagWindowSize, interval=5):
     features = X_df.copy()
     for n in range(1, lagWindowSize):
         for idx, featureName in enumerate(list(X_df.columns.values)):        
             features[f"{featureName}_lag{n}"] = features[featureName].shift(n)
     # drop the first #lagWindowSize rows
-    lag_features = features.iloc[lagWindowSize:]
-    lag_labels = y_df.iloc[lagWindowSize:]
+    lag_features = features.iloc[lagWindowSize::interval]
+    lag_labels = y_df.iloc[lagWindowSize::interval]
     lag_features.reset_index(inplace = True, drop = True)
     lag_labels.reset_index(inplace = True, drop = True)
     return lag_features, lag_labels
@@ -211,13 +211,12 @@ def generate_time_lags(X_df, y_df, lagWindowSize):
 def convert_df_2_np_3D(X_lag, lagWindowSize):
     feature2D = X_lag.to_numpy()
     featureLength = int(X_lag.shape[1]/lagWindowSize)
+    featureMapList = []
     feature3D = None
     for i in range(feature2D.shape[0]):
         featureMap = feature2D[i].reshape([lagWindowSize, featureLength])
         featureMap = np.expand_dims(featureMap, axis=0)
-        if feature3D is None:
-            feature3D = featureMap
-        else:
-            feature3D = np.concatenate((feature3D, featureMap),
-                                    axis=0)
+        featureMapList.append(featureMap)
+    
+    feature3D = np.concatenate(featureMapList, axis=0)
     return feature3D
